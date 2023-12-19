@@ -137,6 +137,14 @@ export default function useKeyboardControl({
     }
   });
 
+  // 处理当hoverIndex没选择时如果option只有一项则hover到选项上
+  watchEffect(() => {
+    const optionsListLength = displayOptions.value.length;
+    if (hoverIndex.value === -1 && optionsListLength === 1) {
+      hoverIndex.value = 0;
+    }
+  });
+
   // 处理键盘操作滚动 超出视图时继续自动滚动到键盘所在元素
   watch(hoverIndex, (index) => {
     const optionHeight =
