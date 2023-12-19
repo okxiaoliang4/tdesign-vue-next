@@ -87,7 +87,7 @@ export default function useKeyboardControl({
         }
 
         if (!multiple) {
-          const optionValue = filteredOptions[hoverIndex.value]?.value;
+          const optionValue = finalOptions[hoverIndex.value]?.value;
           if (!optionValue) return;
           const selectedOptions = getSelectedOptions(optionValue);
           setInnerValue(optionValue, {
@@ -126,14 +126,6 @@ export default function useKeyboardControl({
       hoverIndex.value = -1;
       virtualFilteredOptions.value = [];
       filteredOptions.value = [];
-    }
-  });
-
-  // 处理当hoverIndex没选择时如果option只有一项则hover到选项上
-  watchEffect(() => {
-    const optionsListLength = displayOptions.value.length;
-    if (hoverIndex.value === -1 && optionsListLength === 1) {
-      hoverIndex.value = 0;
     }
   });
 
