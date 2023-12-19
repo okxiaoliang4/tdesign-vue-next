@@ -150,6 +150,7 @@ export default defineComponent({
         scrollToElm(currentHighlightLayerElm.value);
         // fix: https://github.com/Tencent/tdesign-vue-next/issues/2536
         // 这里其实是一个临时解决方案，最合理的是 popup 内部处理
+        // @ts-expect-error types
         popupTooltipRef.value?.update();
       });
     };

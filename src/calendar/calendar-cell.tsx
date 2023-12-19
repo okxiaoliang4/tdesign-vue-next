@@ -94,6 +94,7 @@ export default defineComponent({
     return () => {
       return (
         props.item && (
+          // @ts-expect-error types
           <td class={cellCls.value} onClick={clickCell} ondblclick={clickCell} oncontextmenu={clickCell}>
             {renderContent('cell', undefined, {
               defaultNode: renderDefaultNode(),

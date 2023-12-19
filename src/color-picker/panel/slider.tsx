@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { computed, defineComponent, onBeforeUnmount, onMounted, PropType, reactive, ref } from 'vue';
 import { SLIDER_DEFAULT_WIDTH } from '../const';
 import { Draggable, Coordinate } from '../utils';

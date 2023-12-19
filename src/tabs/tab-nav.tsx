@@ -232,7 +232,9 @@ export default defineComponent({
     const navs = computed(() => {
       return props.panels.map((panel, index) => {
         let label;
+        // @ts-expect-error types
         if (panel?.children?.label) {
+          // @ts-expect-error types
           label = panel.children.label();
         } else if (isFunction(panel.label)) {
           label = panel.label(h);

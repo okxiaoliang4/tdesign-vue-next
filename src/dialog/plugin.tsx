@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { App, createApp, ref, Plugin, defineComponent, h, onMounted, nextTick } from 'vue';
 import DialogComponent from './dialog';
 import { getAttach } from '../utils/dom';
