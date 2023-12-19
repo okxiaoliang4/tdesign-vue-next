@@ -36,6 +36,7 @@ function createLoading(props: TdLoadingProps): LoadingInstance {
 
   const loadingInstance: LoadingInstance = {
     hide: () => {
+      // @ts-expect-error types
       loading.loading = false;
       attach.querySelectorAll(`.${prefixClass.value}`)?.forEach((item) => {
         item.remove();

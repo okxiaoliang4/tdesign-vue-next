@@ -47,6 +47,7 @@ export default defineComponent({
       const iconOnly = icon && !buttonContent;
       const suffix =
         props.suffix || slots.suffix ? (
+          // @ts-expect-error types
           <span className={`${COMPONENT_NAME.value}__suffix`}>{renderTNodeJSX('suffix')}</span>
         ) : null;
 

@@ -219,6 +219,7 @@ export default defineComponent({
     const renderBatchActionCol = (index: number) =>
       // 第一行数据才需要合并单元格
       index === 0 ? (
+        // @ts-expect-error types
         <td rowSpan={displayFiles.value.length} class={`${uploadPrefix.value}__flow-table__batch-row`}>
           <TButton
             theme="primary"
@@ -301,7 +302,7 @@ export default defineComponent({
           <tbody>
             {!displayFiles.value.length && (
               <tr>
-                <td colSpan={4}>{renderEmpty()}</td>
+                <td colspan={4}>{renderEmpty()}</td>
               </tr>
             )}
             {displayFiles.value.map((file, index) => {
