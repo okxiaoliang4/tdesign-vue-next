@@ -1,4 +1,4 @@
-import { defineComponent, provide, computed, toRefs, watch, ref, nextTick, PropType } from 'vue';
+import { defineComponent, provide, computed, toRefs, watch, ref, nextTick, PropType, watchEffect } from 'vue';
 import picker from 'lodash/pick';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
@@ -197,6 +197,12 @@ export default defineComponent({
       popupContentRef,
       multiple: props.multiple,
       max: props.max,
+    });
+
+    watchEffect(() => {
+      if (displayOptions.value.length === 1) {
+        hoverIndex.value = 0;
+      }
     });
 
     const onCheckAllChange = (checked: boolean) => {

@@ -1,7 +1,7 @@
 {
-  "name": "tdesign-vue-next",
+  "name": "@ch/tdesign-vue-next",
   "purename": "tdesign",
-  "version": "1.7.2",
+  "version": "1.7.2-patch-0",
   "title": "tdesign-vue-next",
   "description": "TDesign Component for vue-next",
   "keywords": [
@@ -18,9 +18,6 @@
   "jsdelivr": "dist/tdesign.min.js",
   "files": [
     "es",
-    "esm",
-    "cjs",
-    "lib",
     "dist",
     "LICENSE",
     "README.md",
