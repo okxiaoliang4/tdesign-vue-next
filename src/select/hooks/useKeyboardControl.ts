@@ -1,4 +1,4 @@
-import { ref, watch, ComputedRef, Ref } from 'vue';
+import { ref, watch, ComputedRef, Ref, nextTick } from 'vue';
 import { usePrefixClass } from '../../hooks/useConfig';
 
 import { getNewMultipleValue } from '../helper';
@@ -12,7 +12,12 @@ export type useKeyboardControlType = {
   optionsList: ComputedRef<TdOptionProps[]>;
   innerPopupVisible: Ref<boolean>;
   setInnerPopupVisible: ChangeHandler<boolean, [context: PopupVisibleChangeContext]>;
-  selectPanelRef: Ref<{ isVirtual: boolean; innerRef: HTMLDivElement }>;
+  selectPanelRef: Ref<{
+    isVirtual: boolean;
+    innerRef: HTMLDivElement;
+    visibleData: any[];
+    displayOptions: any[];
+  }>;
   isFilterable: ComputedRef<boolean>;
   getSelectedOptions: (selectValue?: SelectValue[] | SelectValue) => TdOptionProps[];
   setInnerValue: Function;
@@ -109,6 +114,10 @@ export default function useKeyboardControl({
             selectedOptions,
             trigger: newValue.isCheck ? 'check' : 'uncheck',
             e,
+          });
+          nextTick(() => {
+            virtualFilteredOptions.value = selectPanelRef.value?.visibleData;
+            filteredOptions.value = selectPanelRef.value?.displayOptions;
           });
         }
         break;
