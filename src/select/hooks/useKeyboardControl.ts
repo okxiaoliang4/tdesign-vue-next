@@ -1,4 +1,4 @@
-import { ref, watch, ComputedRef, Ref, nextTick } from 'vue';
+import { nextTick, ref, watch, ComputedRef, Ref } from 'vue';
 import { usePrefixClass } from '../../hooks/useConfig';
 
 import { getNewMultipleValue } from '../helper';
@@ -92,10 +92,12 @@ export default function useKeyboardControl({
         }
 
         if (!multiple) {
-          const selectedOptions = getSelectedOptions(finalOptions[hoverIndex.value].value);
-          setInnerValue(finalOptions[hoverIndex.value].value, {
+          const optionValue = filteredOptions[hoverIndex.value]?.value;
+          if (!optionValue) return;
+          const selectedOptions = getSelectedOptions(optionValue);
+          setInnerValue(optionValue, {
             option: selectedOptions?.[0],
-            selectedOptions: getSelectedOptions(finalOptions[hoverIndex.value].value),
+            selectedOptions: getSelectedOptions(optionValue),
             trigger: 'check',
             e,
           });
@@ -138,13 +140,12 @@ export default function useKeyboardControl({
 
   // 处理键盘操作滚动 超出视图时继续自动滚动到键盘所在元素
   watch(hoverIndex, (index) => {
-    const optionHeight = selectPanelRef.value?.innerRef?.querySelector(
-      `.${classPrefix.value}-select-option`,
-    ).clientHeight;
+    const optionHeight =
+      selectPanelRef.value?.innerRef?.querySelector(`.${classPrefix.value}-select-option`)?.clientHeight ?? 0;
 
     const scrollHeight = optionHeight * index;
 
-    popupContentRef.value.scrollTo({
+    popupContentRef.value?.scrollTo({
       top: scrollHeight,
       behavior: 'smooth',
     });
