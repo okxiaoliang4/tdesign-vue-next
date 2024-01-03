@@ -92,12 +92,10 @@ export default function useKeyboardControl({
         }
 
         if (!multiple) {
-          const optionValue = filteredOptions[hoverIndex.value]?.value;
-          if (!optionValue) return;
-          const selectedOptions = getSelectedOptions(optionValue);
-          setInnerValue(optionValue, {
+          const selectedOptions = getSelectedOptions(finalOptions[hoverIndex.value].value);
+          setInnerValue(finalOptions[hoverIndex.value].value, {
             option: selectedOptions?.[0],
-            selectedOptions: getSelectedOptions(optionValue),
+            selectedOptions: getSelectedOptions(finalOptions[hoverIndex.value].value),
             trigger: 'check',
             e,
           });
