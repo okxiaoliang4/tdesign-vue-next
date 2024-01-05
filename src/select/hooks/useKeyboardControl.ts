@@ -1,4 +1,4 @@
-import { nextTick, ref, watch, ComputedRef, Ref } from 'vue';
+import { ref, watch, ComputedRef, Ref, watchEffect } from 'vue';
 import { usePrefixClass } from '../../hooks/useConfig';
 
 import { getNewMultipleValue } from '../helper';
@@ -79,7 +79,6 @@ export default function useKeyboardControl({
         break;
       case 'Enter':
         if (hoverIndex.value === -1) break;
-
         let finalOptions =
           selectPanelRef.value.isVirtual && isFilterable.value && virtualFilteredOptions.value.length
             ? virtualFilteredOptions.value
@@ -115,10 +114,6 @@ export default function useKeyboardControl({
             trigger: newValue.isCheck ? 'check' : 'uncheck',
             e,
           });
-          nextTick(() => {
-            virtualFilteredOptions.value = selectPanelRef.value?.visibleData;
-            filteredOptions.value = selectPanelRef.value?.displayOptions;
-          });
         }
         break;
       case 'Escape':
@@ -126,6 +121,11 @@ export default function useKeyboardControl({
         break;
     }
   };
+
+  watchEffect(() => {
+    virtualFilteredOptions.value = selectPanelRef.value?.visibleData;
+    filteredOptions.value = selectPanelRef.value?.displayOptions;
+  });
 
   watch(innerPopupVisible, (value) => {
     if (value) {
