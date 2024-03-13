@@ -237,7 +237,7 @@ export default function useColumnResize(params: {
     const effectPrevCol = effectColMap.value[col.colKey]?.prev;
     const { resizeLinePos, minResizeLineLeft, maxResizeLineLeft } = isColRightFixActive(col)
       ? getFixedToRightResizeInfo(target, col, effectNextCol, targetBoundRect, tableBoundRect)
-      : getOtherResizeInfo(col, effectNextCol, targetBoundRect, tableBoundRect);
+      : getOtherResizeInfo(col, effectPrevCol, targetBoundRect, tableBoundRect);
 
     // 开始拖拽，记录下鼠标起始位置
     resizeLineParams.isDragging = true;
