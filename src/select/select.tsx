@@ -200,7 +200,7 @@ export default defineComponent({
     });
 
     watchEffect(() => {
-      if (displayOptions.value.length === 1) {
+      if (!innerValue.value && displayOptions.value.length > 0 && hoverIndex.value === -1) {
         hoverIndex.value = 0;
       }
     });
@@ -427,9 +427,11 @@ export default defineComponent({
             }}
             onBlur={(inputValue, { e }) => {
               props.onBlur?.({ e, value: innerValue.value });
+              setInnerPopupVisible(false);
             }}
             onFocus={(inputValue, { e }) => {
               props.onFocus?.({ e, value: innerValue.value });
+              setInnerPopupVisible(true);
             }}
             {...(props.selectInputProps as TdSelectProps['selectInputProps'])}
             v-slots={{
