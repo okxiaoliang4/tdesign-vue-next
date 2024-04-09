@@ -23,6 +23,7 @@ import type { PopupVisibleChangeContext } from '../popup';
 import type { SelectInputValueChangeContext } from '../select-input';
 import type { TdSelectProps, SelectValue } from './type';
 import { SelectInputValueDisplayOptions } from '../select-input/useSingle';
+import { PopupTriggerEvent } from '../popup/type';
 
 export default defineComponent({
   name: 'TSelect',
@@ -427,11 +428,11 @@ export default defineComponent({
             }}
             onBlur={(inputValue, { e }) => {
               props.onBlur?.({ e, value: innerValue.value });
-              setInnerPopupVisible(false);
+              setInnerPopupVisible(false, { e: e as PopupTriggerEvent });
             }}
             onFocus={(inputValue, { e }) => {
               props.onFocus?.({ e, value: innerValue.value });
-              setInnerPopupVisible(true);
+              setInnerPopupVisible(true, { e: e as PopupTriggerEvent });
             }}
             {...(props.selectInputProps as TdSelectProps['selectInputProps'])}
             v-slots={{
