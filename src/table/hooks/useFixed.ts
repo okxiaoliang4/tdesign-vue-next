@@ -475,7 +475,16 @@ export default function useFixed(
     { immediate: true },
   );
 
-  watch([maxHeight, data, columns, bordered], updateFixedHeader, { immediate: true });
+  watch(
+    [maxHeight, data, columns, bordered, tableContentRef],
+    () => {
+      if (tableContentRef.value) {
+        // 如果不监听元素的ref，会出现watch在ref还没ready的时候触发，此时没有触发这个判断的更新，导致表头消失
+        updateFixedHeader();
+      }
+    },
+    { immediate: true },
+  );
 
   watch(finalColumns, () => {
     resetThWidthList();
@@ -540,7 +549,7 @@ export default function useFixed(
       const timer = setTimeout(() => {
         refreshTable();
         clearTimeout(timer);
-      }, 60);
+      }, 200);
     });
     resizeObserver.observe(tableElement);
     tableRef.value = tableElement;
