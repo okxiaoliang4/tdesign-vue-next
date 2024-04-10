@@ -200,11 +200,14 @@ export default defineComponent({
       max: props.max,
     });
 
-    watchEffect(() => {
-      if (!innerValue.value && displayOptions.value.length > 0 && hoverIndex.value === -1) {
-        hoverIndex.value = 0;
-      }
-    });
+    watch(
+      () => [displayOptions.value, hoverIndex.value],
+      ([options]) => {
+        if (options.length === 1) {
+          hoverIndex.value = 0;
+        }
+      },
+    );
 
     const onCheckAllChange = (checked: boolean) => {
       if (!props.multiple) return;
