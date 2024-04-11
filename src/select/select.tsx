@@ -201,7 +201,7 @@ export default defineComponent({
     });
 
     watch(
-      () => [displayOptions.value, hoverIndex.value],
+      () => [displayOptions.value, hoverIndex.value] as const,
       ([options]) => {
         if (options.length === 1) {
           hoverIndex.value = 0;
