@@ -202,9 +202,9 @@ export default defineComponent({
 
     watch(
       () => [displayOptions.value, hoverIndex.value] as const,
-      ([options]) => {
-        if (options.length === 1) {
-          hoverIndex.value = 0;
+      ([options, idx]) => {
+        if (idx === -1 || options.length - 1 < idx) {
+          hoverIndex.value = options.findIndex((item) => !item.disabled);
         }
       },
     );
@@ -431,9 +431,11 @@ export default defineComponent({
             }}
             onBlur={(inputValue, { e }) => {
               props.onBlur?.({ e, value: innerValue.value });
+              setInnerPopupVisible(false, { e: e as PopupTriggerEvent });
             }}
             onFocus={(inputValue, { e }) => {
               props.onFocus?.({ e, value: innerValue.value });
+              setInnerPopupVisible(true, { e: e as PopupTriggerEvent });
             }}
             {...(props.selectInputProps as TdSelectProps['selectInputProps'])}
             v-slots={{
