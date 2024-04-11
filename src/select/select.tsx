@@ -432,7 +432,6 @@ export default defineComponent({
             }}
             onBlur={(inputValue, { e }) => {
               props.onBlur?.({ e, value: innerValue.value });
-              setInnerPopupVisible(false, { e: e as PopupTriggerEvent });
             }}
             onFocus={(inputValue, { e }) => {
               props.onFocus?.({ e, value: innerValue.value });
