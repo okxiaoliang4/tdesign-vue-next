@@ -203,7 +203,7 @@ export default defineComponent({
     watch(
       () => [displayOptions.value, hoverIndex.value] as const,
       ([options, idx]) => {
-        if (idx === -1 || options.length - 1 < idx) {
+        if (!innerValue.value && (idx === -1 || options.length - 1 < idx)) {
           // @ts-expect-error types
           hoverIndex.value = options.findIndex((item) => !item.disabled);
         }
