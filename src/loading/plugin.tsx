@@ -62,6 +62,7 @@ function createLoading(props: TdLoadingProps): LoadingInstance {
 
   const loadingInstance: LoadingInstance = {
     hide: () => {
+      // @ts-expect-error types
       loading.loading = false;
       removeClass(attach, parentRelativeClass);
       removeClass(document.body, lockClass.value);

@@ -108,6 +108,7 @@ export default defineComponent({
     };
 
     const handleMouseEnter = () => {
+      // @ts-expect-error types
       (buttonRef.value as ComponentPublicInstance).focus();
       toggleTooltip(true);
     };
@@ -225,6 +226,7 @@ export default defineComponent({
         style={wrapperStyle.value}
         tabindex="0"
         show-tooltip={showTooltip.value}
+        // @ts-expect-error types
         disabled={parentProps.disabled}
         onmouseenter={handleMouseEnter}
         onmouseleave={handleMouseLeave}

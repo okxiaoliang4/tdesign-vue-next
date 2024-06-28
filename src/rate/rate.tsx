@@ -112,7 +112,10 @@ export default defineComponent({
               </li>
             ))}
           </ul>
-          {props.showText && <div className={`${classPrefix.value}-rate__text`}>{displayText.value}</div>}
+          {
+            // @ts-expect-error types
+            props.showText && <div className={`${classPrefix.value}-rate__text`}>{displayText.value}</div>
+          }
         </div>
       );
     };

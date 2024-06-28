@@ -71,6 +71,7 @@ export default defineComponent({
       if (props.href) {
         window.location.href = props.href;
       }
+      // @ts-expect-error types
       const router = props.router || proxy.$router;
       if (props.to && router) {
         props.replace ? router.replace(props.to) : router.push(props.to);

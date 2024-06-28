@@ -1,5 +1,5 @@
 {
-  "name": "tdesign-vue-next",
+  "name": "@ch/tdesign-vue-next",
   "purename": "tdesign",
   "version": "1.9.6",
   "title": "tdesign-vue-next",
@@ -18,9 +18,6 @@
   "jsdelivr": "dist/tdesign.min.js",
   "files": [
     "es",
-    "esm",
-    "cjs",
-    "lib",
     "dist",
     "LICENSE",
     "README.md",

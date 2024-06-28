@@ -1,4 +1,4 @@
-import { defineComponent, provide, computed, toRefs, watch, ref, nextTick, PropType } from 'vue';
+import { defineComponent, provide, computed, toRefs, watch, ref, nextTick, PropType, watchEffect } from 'vue';
 import picker from 'lodash/pick';
 import isArray from 'lodash/isArray';
 import isFunction from 'lodash/isFunction';
@@ -23,6 +23,7 @@ import type { PopupVisibleChangeContext } from '../popup';
 import type { SelectInputValueChangeContext } from '../select-input';
 import type { TdSelectProps, SelectValue } from './type';
 import { SelectInputValueDisplayOptions } from '../select-input/useSingle';
+import { PopupTriggerEvent } from '../popup/type';
 
 export default defineComponent({
   name: 'TSelect',
@@ -203,6 +204,16 @@ export default defineComponent({
       multiple: props.multiple,
       max: props.max,
     });
+
+    watch(
+      () => [displayOptions.value, hoverIndex.value] as const,
+      ([options, idx]) => {
+        if (!innerValue.value && (idx === -1 || options.length - 1 < idx)) {
+          // @ts-expect-error types
+          hoverIndex.value = options.findIndex((item) => !item.disabled);
+        }
+      },
+    );
 
     const onCheckAllChange = (checked: boolean) => {
       if (!props.multiple) return;

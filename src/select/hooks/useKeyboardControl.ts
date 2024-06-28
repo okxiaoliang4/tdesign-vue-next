@@ -1,4 +1,4 @@
-import { ref, watch, ComputedRef, Ref } from 'vue';
+import { ref, watch, ComputedRef, Ref, watchEffect } from 'vue';
 import { usePrefixClass } from '../../hooks/useConfig';
 
 import { getNewMultipleValue } from '../helper';
@@ -12,7 +12,12 @@ export type useKeyboardControlType = {
   optionsList: ComputedRef<TdOptionProps[]>;
   innerPopupVisible: Ref<boolean>;
   setInnerPopupVisible: ChangeHandler<boolean, [context: PopupVisibleChangeContext]>;
-  selectPanelRef: Ref<{ isVirtual: boolean; innerRef: HTMLDivElement }>;
+  selectPanelRef: Ref<{
+    isVirtual: boolean;
+    innerRef: HTMLDivElement;
+    visibleData: any[];
+    displayOptions: any[];
+  }>;
   isFilterable: ComputedRef<boolean>;
   isRemoteSearch: ComputedRef<boolean>;
   getSelectedOptions: (selectValue?: SelectValue[] | SelectValue) => TdOptionProps[];
@@ -76,7 +81,6 @@ export default function useKeyboardControl({
         break;
       case 'Enter':
         if (hoverIndex.value === -1) break;
-
         let finalOptions =
           selectPanelRef.value.isVirtual && isFilterable.value && virtualFilteredOptions.value.length
             ? virtualFilteredOptions.value
@@ -123,6 +127,11 @@ export default function useKeyboardControl({
     }
   };
 
+  watchEffect(() => {
+    virtualFilteredOptions.value = selectPanelRef.value?.visibleData;
+    filteredOptions.value = selectPanelRef.value?.displayOptions;
+  });
+
   watch(innerPopupVisible, (value) => {
     if (value) {
       // 展开重新恢复初始值
@@ -134,13 +143,12 @@ export default function useKeyboardControl({
 
   // 处理键盘操作滚动 超出视图时继续自动滚动到键盘所在元素
   watch(hoverIndex, (index) => {
-    const optionHeight = selectPanelRef.value?.innerRef?.querySelector(
-      `.${classPrefix.value}-select-option`,
-    ).clientHeight;
+    const optionHeight =
+      selectPanelRef.value?.innerRef?.querySelector(`.${classPrefix.value}-select-option`)?.clientHeight ?? 0;
 
     const scrollHeight = optionHeight * index;
 
-    popupContentRef.value.scrollTo({
+    popupContentRef.value?.scrollTo({
       top: scrollHeight,
       behavior: 'smooth',
     });

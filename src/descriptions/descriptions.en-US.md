@@ -1,7 +1,6 @@
 :: BASE_DOC ::
 
 ## API
-
 ### Descriptions Props
 
 name | type | default | description | required

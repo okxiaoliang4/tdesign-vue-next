@@ -43,11 +43,13 @@ const NotificationFunction = (options: NotificationOptions): Promise<Notificatio
       placement: hackOptions.placement,
     }).mount(wrapper);
 
+    // @ts-expect-error types
     instance.add(hackOptions);
     instanceMap.get(attachEl)[hackOptions.placement] = instance;
     tmpInstance = instance;
     attachEl.appendChild(instance.$el);
   } else {
+    // @ts-expect-error types
     tmpInstance.add(hackOptions);
   }
 
@@ -85,6 +87,7 @@ const extraApi: ExtraApi = {
   closeAll: () => {
     instanceMap.forEach((attach) => {
       Object.keys(attach).forEach((placement) => {
+        // @ts-expect-error types
         attach[placement].removeAll();
       });
     });

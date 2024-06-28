@@ -2318,6 +2318,15 @@
     ],
     "description": "content align type\n\n内容垂直对齐方式，DescriptionsItem.align 优先级高于 Descriptions.align\n\n[docs](https://tdesign.tencent.com/vue-next/components/descriptions?tab=api#descriptions-props)"
   },
+  "t-descriptions/align": {
+    "type": "String",
+    "options": [
+      "top",
+      "middle",
+      "bottom"
+    ],
+    "description": "content align type\n\n内容垂直对齐方式，DescriptionItem.align 优先级高于 Descriptions.align\n\n[docs](https://tdesign.tencent.com/vue-next/components/descriptions?tab=api#descriptions-props)"
+  },
   "t-descriptions/bordered": {
     "type": "Boolean",
     "description": "set description list with grey border\n\n是否带边框\n\ndefault: false\n\n[docs](https://tdesign.tencent.com/vue-next/components/descriptions?tab=api#descriptions-props)"
