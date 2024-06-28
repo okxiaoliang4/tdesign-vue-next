@@ -56,6 +56,7 @@ const NotificationFunction = (options: NotificationOptions): Promise<Notificatio
   return new Promise((resolve) => {
     const ins = instanceMap.get(attachEl)[hackOptions.placement];
     nextTick(() => {
+      // @ts-expect-error types
       const notificationList: NotificationInstance[] = ins.notificationList;
       resolve(notificationList?.find((notify) => notify.$?.vnode?.key === hackOptions.id));
     });
