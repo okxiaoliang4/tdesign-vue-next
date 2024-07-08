@@ -157,6 +157,7 @@ export default defineComponent({
           onMouseenter={() => (isHover.value = true)}
           onMouseleave={() => (isHover.value = false)}
           onClick={handleClick}
+          key={props.value}
         >
           {selectProvider && props.multiple ? (
             <Checkbox
