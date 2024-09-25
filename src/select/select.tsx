@@ -439,9 +439,15 @@ export default defineComponent({
               }, 0);
             }}
             onBlur={(inputValue, { e }) => {
+              innerPopupVisible.value = false;
               props.onBlur?.({ e, value: innerValue.value });
             }}
             onFocus={(inputValue, { e }) => {
+              innerPopupVisible.value = true;
+              setInputValue('');
+              nextTick(() => {
+                setInputValue(displayText.value as string);
+              });
               props.onFocus?.({ e, value: innerValue.value });
             }}
             {...(props.selectInputProps as TdSelectProps['selectInputProps'])}
