@@ -286,7 +286,7 @@ export default defineComponent({
     const handlerPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
       setInnerPopupVisible(visible, context);
       // 在通过点击选择器打开弹窗时 清空此前的输入内容 避免在关闭时就清空引起的闪烁问题
-      if (visible && context.trigger === 'trigger-element-click') setInputValue('');
+      // if (visible && context.trigger === 'trigger-element-click') setInputValue('');
     };
 
     const addCache = (val: SelectValue) => {
@@ -325,6 +325,10 @@ export default defineComponent({
         checkValueInvalid();
       },
     );
+
+    watch(displayText, (newValue) => {
+      setInputValue(newValue as string);
+    });
 
     // 列表展开时定位置选中项
     const updateScrollTop = (content: HTMLDivElement) => {
@@ -439,11 +443,9 @@ export default defineComponent({
               }, 0);
             }}
             onBlur={(inputValue, { e }) => {
-              innerPopupVisible.value = false;
               props.onBlur?.({ e, value: innerValue.value });
             }}
             onFocus={(inputValue, { e }) => {
-              innerPopupVisible.value = true;
               setInputValue('');
               nextTick(() => {
                 setInputValue(displayText.value as string);
