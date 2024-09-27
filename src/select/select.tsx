@@ -326,10 +326,6 @@ export default defineComponent({
       },
     );
 
-    watch(displayText, (newValue) => {
-      setInputValue(newValue as string);
-    });
-
     // 列表展开时定位置选中项
     const updateScrollTop = (content: HTMLDivElement) => {
       if (!selectPanelRef.value) {
@@ -443,13 +439,10 @@ export default defineComponent({
               }, 0);
             }}
             onBlur={(inputValue, { e }) => {
+              popupVisible.value = false;
               props.onBlur?.({ e, value: innerValue.value });
             }}
             onFocus={(inputValue, { e }) => {
-              setInputValue('');
-              nextTick(() => {
-                setInputValue(displayText.value as string);
-              });
               props.onFocus?.({ e, value: innerValue.value });
             }}
             {...(props.selectInputProps as TdSelectProps['selectInputProps'])}
