@@ -51,7 +51,7 @@ export default function useKeyboardControl({
   const handleKeyDown = (e: KeyboardEvent) => {
     const optionsListLength = displayOptions.value.length;
     let newIndex = hoverIndex.value;
-    switch (e.code) {
+    switch (e.key) {
       case 'ArrowUp':
         e.preventDefault();
         if (hoverIndex.value === -1) {
@@ -79,6 +79,7 @@ export default function useKeyboardControl({
         }
         hoverIndex.value = newIndex;
         break;
+      case 'NumpadEnter':
       case 'Enter':
         if (hoverIndex.value === -1) break;
         let finalOptions =
