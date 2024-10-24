@@ -47,13 +47,11 @@ export default defineComponent({
       const flatContent = (ct: any) => {
         return ct
           .map((item: ComponentPublicInstance) => {
-            // @ts-expect-error types
             if (item.children && isArray(item.children)) return flatContent(item.children);
             return item;
           })
           .flat()
           .filter((item: ComponentPublicInstance) => {
-            // @ts-expect-error types
             return item.type.name === 'TTabPanel';
           });
       };
@@ -66,11 +64,8 @@ export default defineComponent({
       const panelsData = panels.map((item: ComponentPublicInstance) => {
         const selfItem = item;
 
-        // @ts-expect-error types
         if (item.props) {
-          // @ts-expect-error types
           Object.keys(item.props).forEach((key) => {
-            // @ts-expect-error types
             selfItem[key] = item.props[key];
           });
         }

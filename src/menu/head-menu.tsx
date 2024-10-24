@@ -131,7 +131,6 @@ export default defineComponent({
       if (href) {
         window.location.href = activeMenuItem.href;
       }
-      // @ts-expect-error types
       const router = activeMenuItem.router || proxy.$router;
       if (to && router) {
         replace ? router.replace(to) : router.push(to);

@@ -205,7 +205,6 @@ export default defineComponent({
 
     watch(textareaStyle, (val) => {
       const { style } = attrs as { style: StyleValue };
-      // @ts-expect-error types
       setStyle(refTextareaElem.value, merge(style, val));
     });
 

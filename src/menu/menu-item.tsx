@@ -53,7 +53,6 @@ export default defineComponent({
       this.menu.select(this.value);
       emitEvent(this, 'click', { e, value: this.value });
       if (this.to || (this.routerLink && this.href)) {
-        // @ts-expect-error types
         const router = this.router || this.$router;
         const methods: string = this.replace ? 'replace' : 'push';
         router[methods](this.to || this.href).catch((err: Error) => {
@@ -72,7 +71,6 @@ export default defineComponent({
     },
   },
   render() {
-    // @ts-expect-error types
     const router = this.router || this.$router;
 
     const liContent = (

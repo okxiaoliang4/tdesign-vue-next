@@ -56,7 +56,6 @@ export default function useRenderIcon(state: TypeTreeItemState) {
           `${classPrefix}-folder-icon`,
           isDefaultIcon ? `${componentName}__icon--default` : '',
         ]}
-        // @ts-expect-error types
         trigger="expand"
         ignore="active"
         onmousedown={handleMousedown}

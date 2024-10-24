@@ -18,6 +18,9 @@
   "jsdelivr": "dist/tdesign.min.js",
   "files": [
     "es",
+    "esm",
+    "cjs",
+    "lib",
     "dist",
     "LICENSE",
     "README.md",

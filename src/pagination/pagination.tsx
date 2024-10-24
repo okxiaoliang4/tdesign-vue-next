@@ -275,7 +275,6 @@ export default defineComponent({
             <div
               class={CLASS_MAP.preBtnClass.value}
               onClick={() => toPage(1)}
-              // @ts-expect-error types
               disabled={props.disabled || props.current === min}
             >
               <PageFirstIcon />
@@ -286,7 +285,6 @@ export default defineComponent({
             <div
               class={CLASS_MAP.preBtnClass.value}
               onClick={() => handlePageChange('prevPage')}
-              // @ts-expect-error types
               disabled={disabled || innerCurrent.value === min}
             >
               <ChevronLeftIcon />
@@ -304,7 +302,6 @@ export default defineComponent({
                 <li
                   class={CLASS_MAP.btnMoreClass.value}
                   onClick={() => handlePageChange('prevMorePage')}
-                  // @ts-expect-error types
                   onMouseOver={() => (prevMore.value = true)}
                   onMouseOut={() => (prevMore.value = false)}
                 >
@@ -320,7 +317,6 @@ export default defineComponent({
                 <li
                   class={CLASS_MAP.btnMoreClass.value}
                   onClick={() => handlePageChange('nextMorePage')}
-                  // @ts-expect-error types
                   onMouseOver={() => (nextMore.value = true)}
                   onMouseOut={() => (nextMore.value = false)}
                 >
@@ -341,7 +337,6 @@ export default defineComponent({
             <div
               class={CLASS_MAP.nextBtnClass.value}
               onClick={() => handlePageChange('nextPage')}
-              // @ts-expect-error types
               disabled={disabled || innerCurrent.value === pageCount.value}
             >
               <ChevronRightIcon />
@@ -352,7 +347,6 @@ export default defineComponent({
             <div
               class={CLASS_MAP.nextBtnClass.value}
               onClick={() => toPage(pageCount.value)}
-              // @ts-expect-error types
               disabled={disabled || innerCurrent.value === pageCount.value}
             >
               <PageLastIcon />

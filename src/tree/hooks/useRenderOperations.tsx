@@ -25,7 +25,6 @@ export default function useRenderOperations(state: TypeTreeItemState) {
     }
     if (opNode) {
       opNode = (
-        // @ts-expect-error types
         <span class={`${componentName}__operations`} ignore="active,expand">
           {opNode}
         </span>

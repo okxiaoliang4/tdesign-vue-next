@@ -123,7 +123,6 @@ export default defineComponent({
       }
 
       return (
-        // @ts-expect-error types
         <div class={classes.value} disabled={disabled.value} onClick={toggle}>
           <span class={nodeClasses.value}>{loadingContent}</span>
           <div class={contentClasses.value}>{switchContent}</div>

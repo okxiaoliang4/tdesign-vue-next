@@ -75,19 +75,16 @@ const MessageFunction = (props: MessageOptions): Promise<MessageInstance> => {
       placement: options.placement,
     }).mount(wrapper);
 
-    // @ts-expect-error types
     mgKey = instance.add(options);
     instanceMap.get(attachDom)[placement] = instance;
     attachDom.appendChild(wrapper);
   } else {
-    // @ts-expect-error types
     mgKey = p.add(options);
   }
   // 返回最新消息的 Element
   return new Promise((resolve) => {
     const ins = instanceMap.get(attachDom)[placement];
     nextTick(() => {
-      // @ts-expect-error types
       const msg: Array<MessageInstance> = ins.messageList;
       resolve(msg?.find((mg) => mg.$?.vnode?.key === mgKey));
     });
@@ -133,7 +130,6 @@ const extraApi: ExtraApi = {
       instanceMap.forEach((attach) => {
         Object.keys(attach).forEach((placement) => {
           const instance = attach[placement];
-          // @ts-expect-error types
           instance.list = [];
         });
       });
