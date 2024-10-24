@@ -40,7 +40,7 @@ scroll | Object | - | 懒加载和虚拟滚动。为保证组件收益最大化�
 transition | Boolean | true | 节点展开折叠时是否使用过渡动画 | N
 value | Array | [] | 选中值，组件为可选状态时有效。支持语法糖 `v-model` 或 `v-model:value`。TS 类型：`Array<TreeNodeValue>` `type TreeNodeValue = string \| number`。[详细类型定义](https://github.com/Tencent/tdesign-vue-next/tree/develop/src/tree/type.ts) | N
 defaultValue | Array | [] | 选中值，组件为可选状态时有效。非受控属性。TS 类型：`Array<TreeNodeValue>` `type TreeNodeValue = string \| number`。[详细类型定义](https://github.com/Tencent/tdesign-vue-next/tree/develop/src/tree/type.ts) | N
-valueMode | String | onlyLeaf | 选中值模式。all 表示父节点和子节点全部会出现在选中值里面；parentFirst 表示当子节点全部选中时，仅父节点在选中值里面；onlyLeaft 表示无论什么情况，选中值仅呈现叶子节点。可选项：onlyLeaf/parentFirst/all | N
+valueMode | String | onlyLeaf | 选中值模式。all 表示父节点和子节点全部会出现在选中值里面；parentFirst 表示当子节点全部选中时，仅父节点在选中值里面；onlyLeaf 表示无论什么情况，选中值仅呈现叶子节点。可选项：onlyLeaf/parentFirst/all | N
 onActive | Function |  | TS 类型：`(value: Array<TreeNodeValue>, context: { node: TreeNodeModel<T>; e?: MouseEvent; trigger: 'node-click' \| 'setItem' }) => void`<br/>节点激活时触发，泛型 `T` 表示树节点 TS 类型 | N
 onChange | Function |  | TS 类型：`(value: Array<TreeNodeValue>, context: { node: TreeNodeModel<T>; e?: any; trigger: 'node-click' \| 'setItem' }) => void`<br/>节点选中状态变化时触发，context.node 表示当前变化的选项，泛型 `T` 表示树节点 TS 类型 | N
 onClick | Function |  | TS 类型：`(context: { node: TreeNodeModel<T>; e: MouseEvent }) => void`<br/>节点点击时触发，泛型 `T` 表示树节点 TS 类型 | N
@@ -85,7 +85,7 @@ insertAfter | `(value: TreeNodeValue, newData: T)` | \- | 必需。插入新节�
 insertBefore | `(value: TreeNodeValue, newData: T)` | \- | 必需。插入新节点到指定节点前面，泛型 `T` 表示树节点 TS 类型
 refresh | \- | \- | 必需。刷新树节点状态，可用于搜索场景刷新
 remove | `(value: TreeNodeValue)` | \- | 必需。移除指定节点
-scrollTo | `(scrollToParams: ScrollToElementParams)` | \- | 虚拟滚动场景下 支持指定滚动到具体的节点
+scrollTo | `(scrollToParams: ComponentScrollToElementParams)` | \- | 虚拟滚动场景下 支持指定滚动到具体的节点
 setItem | `(value: TreeNodeValue, options: TreeNodeState)` | \- | 必需。设置节点状态
 
 ### TreeNodeState

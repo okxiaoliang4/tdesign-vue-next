@@ -152,7 +152,7 @@ const useVirtualScroll = (container: Ref<HTMLElement | null>, params: UseVirtual
   // 固定高度场景，不需要通过行渲染获取高度（仅非固定高度场景需要）
   const handleRowMounted = (rowData: any) => {
     if (!isVirtualScroll.value || !rowData || tScroll.value.isFixedRowHeight || !container.value) return;
-    const trHeight = rowData.ref.value?.getBoundingClientRect().height;
+    const trHeight = rowData.ref.value?.getBoundingClientRect().height || tScroll.value.rowHeight;
     const rowIndex = rowData.data.VIRTUAL_SCROLL_INDEX;
 
     if (trHeightList[rowIndex] !== trHeight) {
@@ -171,7 +171,7 @@ const useVirtualScroll = (container: Ref<HTMLElement | null>, params: UseVirtual
   const refreshVirtualScroll = ([{ contentRect }]: [ResizeObserverEntry]) => {
     // 如果宽度发生变化，重置滚动位置
     const maxScrollbarWidth = 16;
-    if (Math.abs(contentRect.width - containerWidth.value) > maxScrollbarWidth) {
+    if (Math.abs(contentRect.width - containerWidth.value) > maxScrollbarWidth && !!container.value) {
       container.value.scrollTop = 0;
       translateY.value = 0;
     }
@@ -189,6 +189,7 @@ const useVirtualScroll = (container: Ref<HTMLElement | null>, params: UseVirtual
 
   const updateScrollTop = ({ index, top = 0, behavior }: ScrollToElementParams) => {
     const scrollTop = sum(trHeightList.slice(0, index + 1)) - top;
+
     container.value.scrollTo({
       top: scrollTop,
       behavior: behavior || 'auto',
